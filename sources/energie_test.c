@@ -1,8 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <math.h>
-#include<SDL_phelma.h>
-#include "projet.h"
+#include "../headers/projet.h"
 
 
 main(int ac, char**av) { int nl, nc;
@@ -22,7 +21,7 @@ main(int ac, char**av) { int nl, nc;
   im4=gradient(energ,im,nl,nc);
   if (im4!=energ) { printf("Erreur : image retournee differente de l'energie : ---> KO\n"); exit(1); }
   puts("--> OK");
-
+/*
   printf("Test de calcul de l'energie : creation d'une image dans la fonction energie "); fflush(stdout);
   im3=gradient(NULL,im,nl,nc);
   if (im3==NULL) printf("Allocation impossible pour l'image energie "); 
@@ -42,6 +41,6 @@ main(int ac, char**av) { int nl, nc;
   printf("Liberation image 2ieme energie "); fflush(stdout);
   if (im3) libere_image((unsigned char**)im3);
   puts("--> OK");
-
+*/
   return 1;
 }

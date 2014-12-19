@@ -1,6 +1,6 @@
 #include <stdio.h>
 #include <stdlib.h>
-#include "projet.h"
+#include "../headers/projet.h"
 
 unsigned char** alloue_image_char(int nl, int nc)
 {

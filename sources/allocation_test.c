@@ -1,9 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <math.h>
-#include <SDL_phelma.h>
-#include "projet.h"
-
+#include "../headers/projet.h"
 
 int main(int ac, char**av) 
 { 

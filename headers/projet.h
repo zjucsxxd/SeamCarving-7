@@ -1,7 +1,9 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <math.h>
-#include <SDL_phelma.h>
+#include <SDL/SDL.h>
+#include <SDL/SDL_image.h>
+
 
 unsigned int** alloue_image_int(int nl, int nc);
 unsigned char** alloue_image_char(int nl, int nc);
@@ -14,4 +16,4 @@ unsigned char** trace_chemin(unsigned char** im2, unsigned int* ch, int cl, int 
 void supprime_colonne(unsigned char** im, unsigned int* ch_max,int nl, int* pnc); 
 unsigned char** seam_carving(unsigned char** im, int nbcol, int nl, int nc);
 unsigned char** seam_carving_graphique(SDL_Surface* fenetre, unsigned char** im, int nbcol, int nl, int nc);
-unsigned char** gradienty(unsigned char** img,unsigned char** im, int nl, int nc);
+unsigned char** gradienty(unsigned char** energ,unsigned char** im, int nl, int nc);
