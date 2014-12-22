@@ -28,10 +28,10 @@ demo_seam : demo_seam.o seam_carving_graphique.o $(OBJS)
 	gcc -o $@ $^ $(LDFLAGS)
 
 allocation_test.exe : allocation_test.o allocation.o
-	gcc -o $@ $^ $(LDFLAGS)
+	gcc -o $@ objets/$^ $(LDFLAGS)
 
 %.o: %.c
-	gcc -c $< $(CFLAGS)
+	gcc -c sources/$< -o objets/$@ $(CFLAGS)
 	
 clean :
 	rm -f *.o prog  *~
