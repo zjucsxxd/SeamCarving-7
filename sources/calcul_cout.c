@@ -26,4 +26,5 @@ void calcul_cout(unsigned char** energie, unsigned int** pere,unsigned int* cout
 		}
 	}
 	for (j=0;j++;j<nc) cout_final[j] = cout[nl-1][j];
+	libere_image(cout);
 }
