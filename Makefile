@@ -1,4 +1,4 @@
-allocation_test.exe : allocation.o allocation_test.o
+prog.exe : allocation.o allocation_test.o
 	gcc objets/allocation.o objets/allocation_test.o -o allocation_test.exe
 
 %.o : sources/%.c
