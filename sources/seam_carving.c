@@ -1,6 +1,6 @@
 #include <stdio.h>
 #include <stdlib.h>
-#include "../headers/projets.h"
+#include "../headers/projet.h"
 
 unsigned char** seam_carving(unsigned char** im, int nbcol, int nl, int nc)
 {
