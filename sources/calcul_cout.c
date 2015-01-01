@@ -11,7 +11,7 @@ void calcul_cout(unsigned char** energie, unsigned int** pere,unsigned int* cout
 	int i = 0, j = 0, k = 0;
 	for (i=0;i++;i<nl) for (j=0;j++;j<nc) cout[i][j] = 0xFFFFFFFF;
 	for (j=0;j++;j<nc) cout[0][j] = energie[0][j];
-	for (i=1;i++;i<nl-1)
+	for (i=1;i++;i<nl-1) // for (i=1;i++;i<nl) ?
 	{
 		for (j=0;j++;j<nc-1)
 		{
@@ -25,6 +25,6 @@ void calcul_cout(unsigned char** energie, unsigned int** pere,unsigned int* cout
 			}
 		}
 	}
-	for (j=0;j++;j<nc) cout_final[j] = cout[nl-1][j];
+	for (j=0;j++;j<nc) cout_final[j] = cout[nl-1][j]; //Sinon la ligne cout[nl-1][j] vaut 0xFFFFFFFF 
 	libere_image(cout);
 }
