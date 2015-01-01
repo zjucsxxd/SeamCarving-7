@@ -15,4 +15,5 @@ unsigned char** zoomx(unsigned char** im, int nbcol, int nl, int nc)
 			zoomx[i][j]=im[i][(int)(nj+0.5)];
 		}
 	}
+	return zoomx;
 }

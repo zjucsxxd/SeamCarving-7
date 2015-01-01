@@ -34,7 +34,13 @@ unsigned int** alloue_image_int(int nl, int nc)
 	return image_int;
 }
 
-void libere_image(unsigned char** im)
+void libere_image_char(unsigned char** im)
+{
+	free(*im);
+	free(im);
+}
+
+void libere_image_int(unsigned int** im)
 {
 	free(*im);
 	free(im);

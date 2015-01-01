@@ -4,7 +4,8 @@
 
 unsigned int** alloue_image_int(int nl, int nc);
 unsigned char** alloue_image_char(int nl, int nc);
-void libere_image(unsigned char** im);
+void libere_image_char(unsigned char** im);
+void libere_image_int(unsigned int** im);
 unsigned char** zoomx_image(unsigned char **ims, unsigned char **im, int nbcol, int jc, int nl, int nc); 
 void calcul_cout(unsigned char** energie, unsigned int** pere, unsigned int* coutfinal,int nl, int nc); 
 int trouve_chemin(unsigned int* ch_max, unsigned int** pere, unsigned int* coutfinal, int nl, int nc);

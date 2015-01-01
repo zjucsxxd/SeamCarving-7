@@ -26,5 +26,5 @@ void calcul_cout(unsigned char** energie, unsigned int** pere,unsigned int* cout
 		}
 	}
 	for (j=0;j++;j<nc) cout_final[j] = cout[nl-1][j]; //Sinon la ligne cout[nl-1][j] vaut 0xFFFFFFFF 
-	libere_image(cout);
+	libere_image_int(cout);
 }

@@ -8,7 +8,7 @@ unsigned char** seam_carving(unsigned char** im, int nbcol, int nl, int nc)
 
 	int i=0;
 	int j=0;
-	
+	int ncb = nc;	
 	for (i=0;i++;i<nl) for (j=0;j++;j<nc) ims[i][j]=im[i][j];
 	
 	for (j=0;j++;j<nbcol)
@@ -20,10 +20,10 @@ unsigned char** seam_carving(unsigned char** im, int nbcol, int nl, int nc)
 		unsigned int* ch_max = NULL; //numéro de la colonne pour le chemin correspondant à chaque ligne
 		int k=0; //numéro de colonne de la dernière case du chemin
 	
-		energie = gradienty(energie,ims,nl,nc);
-		calcul_cout(energie,pere,cout_final,nl,nc);
-		k = trouve_chemin(ch_max,pere,cout_final,nl,nc);
-		supprime_colonne(ims,ch_max,nl,&nc);
+		energie = gradienty(energie,ims,nl,ncb);
+		calcul_cout(energie,pere,cout_final,nl,ncb);
+		k = trouve_chemin(ch_max,pere,cout_final,nl,ncb);
+		supprime_colonne(ims,ch_max,nl,&ncb);
 
 	}
 	return ims;
