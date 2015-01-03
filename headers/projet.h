@@ -13,3 +13,5 @@ void supprime_colonne(unsigned char** im, unsigned int* ch_max,int nl, int* pnc)
 unsigned char** seam_carving(unsigned char** im, int nbcol, int nl, int nc);
 unsigned char** gradienty(unsigned char** energ,unsigned char** im, int nl, int nc);
 int lire();
+void afficheTab(unsigned char **tab,int nl, int nc);
+

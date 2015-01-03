@@ -26,15 +26,19 @@ int main()
 			im[i][j] = (char) lire();
 		}
 	}
+	printf("Image de départ : \n");
+	afficheTab(im, nl, nc);
 	printf("Réduire l'image de combien de colonnes ? ");
 	nbcol=lire();
 
 	ims = seam_carving(im,nbcol,nl,nc);
-	imz = zoomx(im,nbcol,nl,nc);
+	printf("Image réduite par SeamCarving :\n");
+	afficheTab(ims,nl,nc-nbcol);
+	//imz = zoomx(im,nbcol,nl,nc);
 	
-	libere_image_char(im);
-	libere_image_char(ims);
-	libere_image_char(imz);
+	//libere_image_char(im);
+	//libere_image_char(ims);
+	//libere_image_char(imz);
 	
 	
 }
