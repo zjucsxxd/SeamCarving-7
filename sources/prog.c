@@ -13,9 +13,9 @@ int main()
 
 	printf("Entrez manuellement le tableau représentant l'image de base.\n");
 	printf("Nombre de ligne : ");
-	scanf("%d", &nl);
+	nl = lire();
 	printf("Nombre de colonne :");
-	scanf("%d", &nc);
+	nc=lire();
 	im = alloue_image_char(nl,nc);
 	printf("Entrez les éléments :\n");
 	for (i=0;i<nl;i++) 
@@ -23,18 +23,18 @@ int main()
 		for (j=0;j<nc;j++)
 		{
 			printf("(%d;%d) : ", i, j);
-			scanf("%c", &im[i][j]);
+			im[i][j] = (char) lire();
 		}
 	}
 	printf("Réduire l'image de combien de colonnes ? ");
-	scanf("%d", &nbcol);
-	/*
+	nbcol=lire();
+
 	ims = seam_carving(im,nbcol,nl,nc);
 	imz = zoomx(im,nbcol,nl,nc);
 	
 	libere_image_char(im);
 	libere_image_char(ims);
 	libere_image_char(imz);
-	*/
+	
 	
 }
