@@ -9,9 +9,9 @@ unsigned char** seam_carving(unsigned char** im, int nbcol, int nl, int nc)
 	int i=0;
 	int j=0;
 	int ncb = nc;	
-	for (i=0;i++;i<nl) for (j=0;j++;j<nc) ims[i][j]=im[i][j];
+	for (i=0;i<nl;i++) for (j=0;j<nc;j++) ims[i][j]=im[i][j];
 	
-	for (j=0;j++;j<nbcol)
+	for (j=0;j<nbcol;j++)
 	{
 		
 		unsigned char** energie = NULL; //energie de l'image

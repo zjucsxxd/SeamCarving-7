@@ -11,7 +11,7 @@ int main()
 	unsigned char** ims = NULL;
 	unsigned char** imz = NULL;
 
-	printf("Entrez manuellement le tableau représentant l'image de base.\n");
+	printf("\n\n\nEntrez manuellement le tableau représentant l'image de base.\n");
 	printf("Nombre de ligne : ");
 	nl = lire();
 	printf("Nombre de colonne :");
