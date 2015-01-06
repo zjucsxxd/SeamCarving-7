@@ -10,8 +10,10 @@ int main(int argc, char *argv[])
 	unsigned char** im = NULL;
 	unsigned char** ims = NULL;
 	unsigned char** imz = NULL;
+	int test = 1;
 
-	if (argv[0] == "test")
+
+	if (test)
 	{
 		im = alloue_image_char(6,7);
 		nl = 6;
