@@ -14,4 +14,5 @@ unsigned char** seam_carving(unsigned char** im, int nbcol, int nl, int nc);
 unsigned char** gradienty(unsigned char** energ,unsigned char** im, int nl, int nc);
 int lire();
 void afficheTab(unsigned char **tab,int nl, int nc);
+void afficheTabInt(unsigned int **tab,int nl, int nc);
 
