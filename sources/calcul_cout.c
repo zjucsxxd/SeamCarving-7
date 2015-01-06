@@ -9,11 +9,11 @@ void calcul_cout(unsigned char** energie, unsigned int** pere,unsigned int* cout
 	cout_final = calloc(nc, sizeof(unsigned int));
 	if (cout_final == NULL) printf("Erreur d'allocation.\n");
 	int i = 0, j = 0, k = 0;
-	for (i=0;i++;i<nl) for (j=0;j++;j<nc) cout[i][j] = 0xFFFFFFFF;
-	for (j=0;j++;j<nc) cout[0][j] = energie[0][j];
-	for (i=1;i++;i<nl) // for (i=1;i++;i<nl) ?
+	for (i=0;i<nl;i++) for (j=0;j<nc;j++) cout[i][j] = 0xFFFFFFFF;
+	for (j=0;j<nc;j++) cout[0][j] = energie[0][j];
+	for (i=1;i<nl;i++) 
 	{
-		for (j=0;j++;j<nc-1)
+		for (j=0;j<nc-1;j++)
 		{
 			for (k=-1;k++;k<2)
 			{
@@ -25,6 +25,6 @@ void calcul_cout(unsigned char** energie, unsigned int** pere,unsigned int* cout
 			}
 		}
 	}
-	for (j=0;j++;j<nc) cout_final[j] = cout[nl-1][j]; //Sinon la ligne cout[nl-1][j] vaut 0xFFFFFFFF 
+	for (j=0;j<nc;j++) cout_final[j] = cout[nl-1][j];  
 	libere_image_int(cout);
 }
