@@ -15,16 +15,18 @@ unsigned char** seam_carving(unsigned char** im, int nbcol, int nl, int nc)
 	{
 		
 		unsigned char** energie = NULL; //energie de l'image
+		energie = gradienty(energie,ims,nl,ncb);
+		afficheTab(energie,nl,ncb);
+		/*	
 		unsigned int** pere = NULL; //indication pour chaque case du numéro de colonne par laquelle on est arrivé
 		unsigned int* cout_final = NULL; //indication du cout du chemin pour arriver à la derniere case
+		calcul_cout(energie,pere,cout_final,nl,ncb);
+	
 		unsigned int* ch_max = NULL; //numéro de la colonne pour le chemin correspondant à chaque ligne
 		int k=0; //numéro de colonne de la dernière case du chemin
-	
-		energie = gradienty(energie,ims,nl,ncb);
-		calcul_cout(energie,pere,cout_final,nl,ncb);
 		k = trouve_chemin(ch_max,pere,cout_final,nl,ncb);
 		supprime_colonne(ims,ch_max,nl,&ncb);
-
+		*/
 	}
 	return ims;
 }
