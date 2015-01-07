@@ -8,7 +8,6 @@ void calcul_cout(unsigned char** energie, unsigned int** pere,unsigned int* cout
 	if (pere == NULL) pere=alloue_image_int(nl, nc);
 	
 	unsigned int** cout = alloue_image_int(nl,nc);
-	cout_final = calloc(nc, sizeof(unsigned int));
 	if (cout_final == NULL) printf("Erreur d'allocation.\n");
 	int i = 0, j = 0, k = 0;
 	
@@ -19,7 +18,7 @@ void calcul_cout(unsigned char** energie, unsigned int** pere,unsigned int* cout
 
 	for (i=1;i<nl;i++) 
 	{
-		for (j=0;j<nc-1;j++)
+		for (j=0;j<nc;j++)
 		{
 			for (k=-1;k<2;k++)
 			{
@@ -32,7 +31,8 @@ void calcul_cout(unsigned char** energie, unsigned int** pere,unsigned int* cout
 		}
 	}
 	for (j=0;j<nc;j++) cout_final[j] = cout[nl-1][j];  
-	
+	printf("Tableau cout :\n");
+	afficheTabInt(cout,nl,nc);	
 	libere_image_int(cout);
 	
 }

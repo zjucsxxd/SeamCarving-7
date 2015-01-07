@@ -88,7 +88,7 @@ int main(int argc, char *argv[])
 	nbcol=lire();
 
 	ims = seam_carving(im,nbcol,nl,nc);
-	//printf("Image réduite par SeamCarving :\n");
+	//printf("\nImage réduite par SeamCarving :\n");
 	//afficheTab(ims,nl,nc-nbcol);
 	//imz = zoomx(im,nbcol,nl,nc);
 	

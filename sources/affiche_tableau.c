@@ -30,3 +30,14 @@ void afficheTabInt(unsigned int **tab,int nl, int nc)
 	}
 	printf("\n\n");
 }
+
+void affiche1D(unsigned int* tab, int n)
+{
+	int i;
+	printf("|");
+	for (i=0;i<n;i++)
+	{
+		printf("      %d     |",tab[i]);
+	}
+	printf("\n\n");
+}
