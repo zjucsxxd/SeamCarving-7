@@ -20,10 +20,13 @@ unsigned char** seam_carving(unsigned char** im, int nbcol, int nl, int nc)
 		afficheTab(energie,nl,ncb);
 			
 		unsigned int** pere = NULL; //indication pour chaque case du numéro de colonne par laquelle on est arrivé
+		pere=alloue_image_int(nl,ncb); //allouer le tableau à l'intérieur de la fonction calcul_cout donnait des problèmes
 		unsigned int* cout_final = NULL; //indication du cout du chemin pour arriver à la derniere case
 		calcul_cout(energie,pere,cout_final,nl,ncb);
 		printf("Tableau père :\n");
 		afficheTabInt(pere,nl,ncb);
+		//int fa = pere[0][0];
+		
 
 		/*		
 		unsigned int* ch_max = NULL; //numéro de la colonne pour le chemin correspondant à chaque ligne

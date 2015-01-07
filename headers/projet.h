@@ -15,4 +15,3 @@ unsigned char** gradienty(unsigned char** energ,unsigned char** im, int nl, int 
 int lire();
 void afficheTab(unsigned char **tab,int nl, int nc);
 void afficheTabInt(unsigned int **tab,int nl, int nc);
-

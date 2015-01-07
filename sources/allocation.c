@@ -7,10 +7,15 @@ unsigned char** alloue_image_char(int nl, int nc)
 	int i=0;
 	unsigned char** image_char = NULL;
 	image_char = calloc(nl, sizeof(*image_char));
-	if (image_char == NULL) return NULL;
+	if (image_char == NULL) 
+	{
+		printf("Erreur d'allocation");
+		return NULL;
+	}
 	*image_char = calloc(nl*nc, sizeof(**image_char));
 	if (*image_char == NULL) 
 	{
+		printf("Erreur d'allocation");
 		free(image_char);
 		return NULL;
 	}
@@ -23,10 +28,15 @@ unsigned int** alloue_image_int(int nl, int nc)
 	int i=0;
 	unsigned int** image_int = NULL;
 	image_int = calloc(nl, sizeof(*image_int));
-	if (image_int == NULL) return NULL;
+	if (image_int == NULL) 
+	{
+		printf("Erreur d'allocation");
+		return NULL;
+	}
 	*image_int = calloc(nl*nc, sizeof(**image_int));
 	if (*image_int == NULL) 
 	{
+		printf("Erreur d'allocation");	
 		free(image_int);
 		return NULL;
 	}
