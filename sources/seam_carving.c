@@ -28,12 +28,16 @@ unsigned char** seam_carving(unsigned char** im, int nbcol, int nl, int nc)
 		afficheTabInt(pere,nl,ncb);
 		printf("Tableau cout_final : \n");
 		affiche1D(cout_final,ncb);
-/*
+
 		unsigned int* ch_max = NULL; //numéro de la colonne pour le chemin correspondant à chaque ligne
+		ch_max = calloc(nl, sizeof(unsigned int));
 		int k=0; //numéro de colonne de la dernière case du chemin
 		k = trouve_chemin(ch_max,pere,cout_final,nl,ncb);
+		printf("k = %d\n", k);
+		printf("Tableau du chemin :\n");
+		affiche1D(ch_max,nl);
 		supprime_colonne(ims,ch_max,nl,&ncb);
-		*/
+		
 	}
 	return ims;
 }

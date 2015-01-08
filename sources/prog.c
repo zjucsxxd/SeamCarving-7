@@ -12,7 +12,6 @@ int main(int argc, char *argv[])
 	unsigned char** imz = NULL;
 	int test = 1;
 
-
 	if (test)
 	{
 		im = alloue_image_char(6,7);
@@ -88,13 +87,19 @@ int main(int argc, char *argv[])
 	nbcol=lire();
 
 	ims = seam_carving(im,nbcol,nl,nc);
-	//printf("\nImage réduite par SeamCarving :\n");
-	//afficheTab(ims,nl,nc-nbcol);
-	//imz = zoomx(im,nbcol,nl,nc);
+	printf("\nImage réduite par SeamCarving :\n");
+	afficheTab(ims,nl,nc-nbcol);
 	
-	//libere_image_char(im);
-	//libere_image_char(ims);
-	//libere_image_char(imz);
+	
+	imz = zoomx(im,nbcol,nl,nc);
+	printf("Image zoomée linéairement :\n");
+	afficheTab(imz,nl,nc-nbcol);
+	
+	libere_image_char(im);
+	libere_image_char(ims);
+	libere_image_char(imz);
+	
+	
 	
 	
 }
