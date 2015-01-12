@@ -86,84 +86,62 @@ int main(int argc, char *argv[])
 	{
 		SDL_Init(SDL_INIT_VIDEO);
 		SDL_Surface *screen = NULL;
-		SDL_Surface *image=NULL;
 		SDL_Surface *sm=NULL;
-		SDL_Rect position;
-		position.x=0;
-		position.y=0;
-		image = SDL_LoadBMP(argv[1]);
-		int W = image->w;
-		int H = image->h;
-		Uint8 r,g,b;
-		Uint32 pixel;
-		screen = SDL_SetVideoMode(2*W,2*H,32,SDL_HWSURFACE | SDL_RESIZABLE);
-		SDL_WM_SetCaption("SeamCarving",argv[1]); 
-		SDL_WM_SetIcon(SDL_LoadBMP(argv[1]), NULL);
-		sm = SDL_CreateRGBSurface(SDL_HWSURFACE, W, H, 32, 0, 0, 0, 0);
+		SDL_Surface *zx=NULL;
 
-		im = alloue_image_char(H,W);
-		for (i=0;i<H;i++)
-		{
-			for (j=0;j<W;j++)
-			{
-				SDL_GetRGB(getpixel(image,j,i), image->format, &r, &g, &b);
-				im[i][j]=(unsigned char)r;
-			}
-		}
-		
-		for (i=0;i<H;i++)
-		{
-			for (j=0;j<W;j++)
-			{
-				pixel = SDL_MapRGB(sm->format, (Uint8) im[i][j], (Uint8) im[i][j], (Uint8) im[i][j]);
-				putpixel(sm,j,i,pixel);
-			}
-		}
-		
-		SDL_BlitSurface(sm, NULL, screen, &position);
-		SDL_Flip(screen);
-		pause();
-		printf("Réduire de combien de pixel ?");
-		nbcol=lire();
+		im = lire_image(argv[1], &nl, &nc);
+
 		SDL_Rect positionS;
 		positionS.x=0;
-		positionS.y=H;
+		positionS.y=0;
 		SDL_Rect positionZ;
-		positionZ.x=W;
-		positionZ.y=H;
-		printf("Image réduite par SeamCarving\n");
-		ims = seam_carving(im,nbcol,H,W);
-		for (i=0;i<H;i++)
-		{
-			for (j=0;j<W;j++)
-			{
-				pixel = SDL_MapRGB(sm->format, (Uint8) ims[i][j], (Uint8) ims[i][j], (Uint8) ims[i][j]);
-				putpixel(sm,j,i,pixel);
-			}
-		}
-		SDL_BlitSurface(sm, NULL, screen, &positionS);
-		SDL_Flip(screen);
-
-		pause();
-
-
-
-
-		printf("Image réduite par zoom linéaire\n");
-		imz = zoomx(im,nbcol,H,W);
-		for (i=0;i<H;i++)
-		{
-			for (j=0;j<W;j++)
-			{
-				pixel = SDL_MapRGB(sm->format, (Uint8) imz[i][j], (Uint8) imz[i][j], (Uint8) imz[i][j]);
-				putpixel(sm,j,i,pixel);
-			}
-		}
-		SDL_BlitSurface(sm, NULL, screen, &positionZ);
-		SDL_Flip(screen);
-
-		pause();
+		positionZ.x=0;
+		positionZ.y=nl;
 	
+		screen = SDL_SetVideoMode(nc,2*nl,32,SDL_HWSURFACE | SDL_RESIZABLE);
+		SDL_WM_SetCaption("SeamCarving",argv[1]); 
+		SDL_WM_SetIcon(SDL_LoadBMP(argv[1]), NULL);
+
+		sm = SDL_CreateRGBSurface(SDL_HWSURFACE, nc, nl, 32, 0, 0, 0, 0);
+		zx = SDL_CreateRGBSurface(SDL_HWSURFACE, nc, nl, 32, 0, 0, 0, 0);
+
+
+		dessiner(im,screen,sm, positionS, nl, nc);
+		dessiner(im,screen,zx, positionZ, nl, nc);
+
+			
+		int continuer =1;
+		SDL_Event event;
+		while (continuer)
+		
+			SDL_WaitEvent(&event);
+			switch(event.type)
+			{
+				case SDL_QUIT :
+					continuer = 0;
+
+				case SDL_KEYDOWN:
+					switch (event.key.keysym.sym)
+					{
+						case SDLK_ESCAPE:
+							continuer=0;
+						break;
+
+						default:
+						break;
+					}		
+				break;
+			}
+			SDL_Flip(screen);
+			dessiner(im,screen,sm, positionS, nl, nc);
+			dessiner(im,screen,zx, positionZ, nl, nc);
+		}
+
+
+
+		
+		SDL_FreeSurface(sm);
+		SDL_FreeSurface(zx);
 		SDL_Quit();
 
 		libere_image_char(im);

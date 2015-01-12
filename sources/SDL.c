@@ -2,35 +2,6 @@
 #include <stdlib.h>
 #include "../headers/projet.h"
 
-void pause()
-{
-	int continuer =1;
-	SDL_Event event;
-
-	while (continuer)
-	{
-		SDL_WaitEvent(&event);
-		switch(event.type)
-		{
-			case SDL_QUIT :
-				continuer = 0;
-
-			case SDL_KEYDOWN:
-				switch (event.key.keysym.sym)
-				{
-					case SDLK_ESCAPE:
-						continuer=0;
-						break;
-
-					default:
-						break;
-				}
-				break;
-		}
-	}
-}
-
-
 /*
  * Return the pixel value at (x, y)
  * NOTE: The surface must be locked before calling this!
@@ -99,4 +70,41 @@ void putpixel(SDL_Surface *surface, int x, int y, Uint32 pixel)
     }
 }
 
+unsigned char **lire_image(char* image,int* nl, int* nc)
+{
+	Uint8 r,g,b;
+	int i,j;
+	SDL_Surface* img = NULL;
+	img = SDL_LoadBMP(image);
+	*nl=img->h;
+	*nc=img->w;
+	unsigned char **im = NULL;
+	im = alloue_image_char(*nl,*nc);
+	for (i=0;i<*nl;i++)
+	{
+		for (j=0;j<*nc;j++)
+		{
+			SDL_GetRGB(getpixel(img,j,i), img->format, &r, &g, &b);
+			im[i][j]=(unsigned char)r;
+		}
+	}
+	SDL_FreeSurface(img);
+	return im;
+}
+
+void dessiner(unsigned char** im,SDL_Surface *screen, SDL_Surface *img, SDL_Rect pos, int nl, int nc)
+{
+	int i,j;
+	SDL_FillRect(img, NULL, SDL_MapRGB(screen->format, 255, 255, 255));
+	Uint32 pixel;
+	for (i=0;i<nl;i++)
+	{
+		for (j=0;j<nc;j++)
+		{
+			pixel = SDL_MapRGB(img->format, (Uint8) im[i][j], (Uint8) im[i][j], (Uint8) im[i][j]);
+			putpixel(img,j,i,pixel);
+		}
+	}
+	SDL_BlitSurface(img, NULL, screen, &pos);
+}
 
