@@ -113,29 +113,36 @@ int main(int argc, char *argv[])
 		int continuer =1;
 		SDL_Event event;
 		while (continuer)
-		
+		{	
 			SDL_WaitEvent(&event);
 			switch(event.type)
 			{
 				case SDL_QUIT :
 					continuer = 0;
+					break;
 
 				case SDL_KEYDOWN:
 					switch (event.key.keysym.sym)
 					{
 						case SDLK_ESCAPE:
 							continuer=0;
-						break;
+							break;
 
 						default:
-						break;
+							break;
 					}		
-				break;
+					break;
+
+				case SDL_VIDEORESIZE:
+					nl = event.resize.h;
+					nc = event.resize.w;
+					break;
 			}
+			
+			//dessiner(im,screen,sm, positionS, nl, nc);
+			//dessiner(im,screen,zx, positionZ, nl, nc);
 			SDL_Flip(screen);
-			dessiner(im,screen,sm, positionS, nl, nc);
-			dessiner(im,screen,zx, positionZ, nl, nc);
-		}
+		}	
 
 
 
