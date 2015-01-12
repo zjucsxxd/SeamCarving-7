@@ -4,15 +4,15 @@
 
 int main(int argc, char *argv[])
 {
-	//Entrée manuelle du tableau im	
 	int nc,nl,nbcol;
 	int i,j;
 	unsigned char** im = NULL;
 	unsigned char** ims = NULL;
 	unsigned char** imz = NULL;
-	int test = 1;
+	int test = 0;
+	//test = lire();	
 
-	if (test)
+	if (test == 1) //Tableau de test pré-rentré
 	{
 		im = alloue_image_char(6,7);
 		nl = 6;
@@ -60,9 +60,117 @@ int main(int argc, char *argv[])
 		im[5][4]=176;
 		im[5][5]=180;
 		im[5][6]=180;
+		
+
+		printf("Image de départ : \n");
+		afficheTab(im, nl, nc);
+		printf("Réduire l'image de combien de colonnes ? ");
+		nbcol=lire();
+
+		ims = seam_carving(im,nbcol,nl,nc);
+		printf("\nImage réduite par SeamCarving :\n");
+		afficheTab(ims,nl,nc-nbcol);
+	
+	
+		imz = zoomx(im,nbcol,nl,nc);
+		printf("Image zoomée linéairement :\n");
+		afficheTab(imz,nl,nc-nbcol);
+	
+		libere_image_char(im);
+		libere_image_char(ims);
+		libere_image_char(imz);
+
 	}
 
-	else
+	else if (test == 0)
+	{
+		SDL_Init(SDL_INIT_VIDEO);
+		SDL_Surface *screen = NULL;
+		SDL_Surface *image=NULL;
+		SDL_Surface *sm=NULL;
+		SDL_Rect position;
+		position.x=0;
+		position.y=0;
+		image = SDL_LoadBMP(argv[1]);
+		int W = image->w;
+		int H = image->h;
+		Uint8 r,g,b;
+		Uint32 pixel;
+		screen = SDL_SetVideoMode(2*W,2*H,32,SDL_HWSURFACE | SDL_RESIZABLE);
+		SDL_WM_SetCaption("SeamCarving",argv[1]); 
+		SDL_WM_SetIcon(SDL_LoadBMP(argv[1]), NULL);
+		sm = SDL_CreateRGBSurface(SDL_HWSURFACE, W, H, 32, 0, 0, 0, 0);
+
+		im = alloue_image_char(H,W);
+		for (i=0;i<H;i++)
+		{
+			for (j=0;j<W;j++)
+			{
+				SDL_GetRGB(getpixel(image,j,i), image->format, &r, &g, &b);
+				im[i][j]=(unsigned char)r;
+			}
+		}
+		
+		for (i=0;i<H;i++)
+		{
+			for (j=0;j<W;j++)
+			{
+				pixel = SDL_MapRGB(sm->format, (Uint8) im[i][j], (Uint8) im[i][j], (Uint8) im[i][j]);
+				putpixel(sm,j,i,pixel);
+			}
+		}
+		
+		SDL_BlitSurface(sm, NULL, screen, &position);
+		SDL_Flip(screen);
+		pause();
+		printf("Réduire de combien de pixel ?");
+		nbcol=lire();
+		SDL_Rect positionS;
+		positionS.x=0;
+		positionS.y=H;
+		SDL_Rect positionZ;
+		positionZ.x=W;
+		positionZ.y=H;
+		printf("Image réduite par SeamCarving\n");
+		ims = seam_carving(im,nbcol,H,W);
+		for (i=0;i<H;i++)
+		{
+			for (j=0;j<W;j++)
+			{
+				pixel = SDL_MapRGB(sm->format, (Uint8) ims[i][j], (Uint8) ims[i][j], (Uint8) ims[i][j]);
+				putpixel(sm,j,i,pixel);
+			}
+		}
+		SDL_BlitSurface(sm, NULL, screen, &positionS);
+		SDL_Flip(screen);
+
+		pause();
+
+
+
+
+		printf("Image réduite par zoom linéaire\n");
+		imz = zoomx(im,nbcol,H,W);
+		for (i=0;i<H;i++)
+		{
+			for (j=0;j<W;j++)
+			{
+				pixel = SDL_MapRGB(sm->format, (Uint8) imz[i][j], (Uint8) imz[i][j], (Uint8) imz[i][j]);
+				putpixel(sm,j,i,pixel);
+			}
+		}
+		SDL_BlitSurface(sm, NULL, screen, &positionZ);
+		SDL_Flip(screen);
+
+		pause();
+	
+		SDL_Quit();
+
+		libere_image_char(im);
+		libere_image_char(ims);
+		libere_image_char(imz);
+	}
+	else  //Entrée manuelle du tableau
 	{
 		printf("\n\n\nEntrez manuellement le tableau représentant l'image de base.\n");
 		printf("Nombre de ligne : ");
@@ -79,27 +187,30 @@ int main(int argc, char *argv[])
 				im[i][j] = (char) lire();
 			}
 		}
+
+		printf("Image de départ : \n");
+		afficheTab(im, nl, nc);
+		printf("Réduire l'image de combien de colonnes ? ");
+		nbcol=lire();
+
+		ims = seam_carving(im,nbcol,nl,nc);
+		printf("\nImage réduite par SeamCarving :\n");
+		afficheTab(ims,nl,nc-nbcol);
+	
+	
+		imz = zoomx(im,nbcol,nl,nc);
+		printf("Image zoomée linéairement :\n");
+		afficheTab(imz,nl,nc-nbcol);
+	
+		libere_image_char(im);
+		libere_image_char(ims);
+		libere_image_char(imz);
+
 	}	
+	
 
-	printf("Image de départ : \n");
-	afficheTab(im, nl, nc);
-	printf("Réduire l'image de combien de colonnes ? ");
-	nbcol=lire();
-
-	ims = seam_carving(im,nbcol,nl,nc);
-	printf("\nImage réduite par SeamCarving :\n");
-	afficheTab(ims,nl,nc-nbcol);
+		
 	
 	
-	imz = zoomx(im,nbcol,nl,nc);
-	printf("Image zoomée linéairement :\n");
-	afficheTab(imz,nl,nc-nbcol);
-	
-	libere_image_char(im);
-	libere_image_char(ims);
-	libere_image_char(imz);
-	
-	
-	
-	
+	return EXIT_SUCCESS;	
 }

@@ -31,8 +31,8 @@ void calcul_cout(unsigned char** energie, unsigned int** pere,unsigned int* cout
 		}
 	}
 	for (j=0;j<nc;j++) cout_final[j] = cout[nl-1][j];  
-	printf("Tableau cout :\n");
-	afficheTabInt(cout,nl,nc);	
+	//printf("Tableau cout :\n");
+	//afficheTabInt(cout,nl,nc);	
 	libere_image_int(cout);
 	
 }

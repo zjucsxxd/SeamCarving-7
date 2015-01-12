@@ -8,7 +8,7 @@ unsigned char** zoomx(unsigned char** im, int nbcol, int nl, int nc)
 	int i,j;
 	double nj;
 	double k = (double)(nc - nbcol)/(double)nc;
-	printf("k vaut %lf\n", k);
+	//printf("k vaut %lf\n", k);
 	unsigned char** zmx = NULL;
 	zmx = alloue_image_char(nl, nc-nbcol);
 	for (i=0;i<nl;i++) 

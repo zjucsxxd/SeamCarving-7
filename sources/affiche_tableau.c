@@ -6,7 +6,7 @@ void afficheTab(unsigned char **tab,int nl, int nc)
 	int i,j;
 	for (i=0;i<nl;i++)
 	{
-		printf("|");
+		printf("Ligne n°%d|", i);
 		for (j=0;j<nc;j++)
 		{
 			printf("    %d    |",tab[i][j]);

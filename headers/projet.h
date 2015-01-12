@@ -1,6 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <math.h>
+#include <SDL/SDL.h>
 
 unsigned int** alloue_image_int(int nl, int nc);
 unsigned char** alloue_image_char(int nl, int nc);
@@ -15,3 +16,6 @@ unsigned char** gradienty(unsigned char** energ,unsigned char** im, int nl, int 
 int lire();
 void afficheTab(unsigned char **tab,int nl, int nc);
 void afficheTabInt(unsigned int **tab,int nl, int nc);
+void pause();
+Uint32 getpixel(SDL_Surface *surface, int x, int y);
+void putpixel(SDL_Surface *surface, int x, int y, Uint32 pixel);
