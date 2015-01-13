@@ -4,7 +4,8 @@
 
 unsigned char** seam_carving(unsigned char** im, int nbcol, int nl, int nc)
 {
-	unsigned char** ims = alloue_image_char(nl,nc);
+	unsigned char** ims = NULL;
+	ims = alloue_image_char(nl,nc);
 
 	int i=0;
 	int j=0;

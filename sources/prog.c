@@ -89,7 +89,8 @@ int main(int argc, char *argv[])
 		SDL_Surface *sm=NULL;
 		SDL_Surface *zx=NULL;
 
-		im = lire_image(argv[1], &nl, &nc);
+		im = lire_image("pictures/mongol.bmp", &nl, &nc);
+		int NC = nc;
 
 		SDL_Rect positionS;
 		positionS.x=0;
@@ -99,8 +100,7 @@ int main(int argc, char *argv[])
 		positionZ.y=nl;
 	
 		screen = SDL_SetVideoMode(nc,2*nl,32,SDL_HWSURFACE | SDL_RESIZABLE);
-		SDL_WM_SetCaption("SeamCarving",argv[1]); 
-		SDL_WM_SetIcon(SDL_LoadBMP(argv[1]), NULL);
+		SDL_WM_SetCaption("SeamCarving",NULL); 
 
 		sm = SDL_CreateRGBSurface(SDL_HWSURFACE, nc, nl, 32, 0, 0, 0, 0);
 		zx = SDL_CreateRGBSurface(SDL_HWSURFACE, nc, nl, 32, 0, 0, 0, 0);
@@ -134,12 +134,16 @@ int main(int argc, char *argv[])
 					break;
 
 				case SDL_VIDEORESIZE:
-					nl = event.resize.h;
 					nc = event.resize.w;
+					//printf("\n\nnc = %d\n", nc);
+					//printf("NC = %d\nNC - nc = %d\n",NC,NC-nc);
+					ims = seam_carving(im,NC-nc,nl,NC);
+					//imz = zoomx(im,NC-nc,nl,NC);
+					//afficheTab(ims,nl,nc);
+					dessiner(ims,screen,sm, positionS, nl, nc);
 					break;
 			}
 			
-			//dessiner(im,screen,sm, positionS, nl, nc);
 			//dessiner(im,screen,zx, positionZ, nl, nc);
 			SDL_Flip(screen);
 		}	
@@ -152,8 +156,8 @@ int main(int argc, char *argv[])
 		SDL_Quit();
 
 		libere_image_char(im);
-		libere_image_char(ims);
-		libere_image_char(imz);
+		//libere_image_char(ims);
+		//libere_image_char(imz);
 	}
 	else  //Entrée manuelle du tableau
 	{
