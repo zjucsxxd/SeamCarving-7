@@ -89,7 +89,7 @@ int main(int argc, char *argv[])
 		SDL_Surface *sm=NULL;
 		SDL_Surface *zx=NULL;
 
-		im = lire_image("pictures/mongol.bmp", &nl, &nc);
+		im = lire_image(argv[1], &nl, &nc);
 		int NC = nc;
 
 		SDL_Rect positionS;
@@ -138,13 +138,13 @@ int main(int argc, char *argv[])
 					//printf("\n\nnc = %d\n", nc);
 					//printf("NC = %d\nNC - nc = %d\n",NC,NC-nc);
 					ims = seam_carving(im,NC-nc,nl,NC);
-					//imz = zoomx(im,NC-nc,nl,NC);
+					imz = zoomx(im,NC-nc,nl,NC);
 					//afficheTab(ims,nl,nc);
 					dessiner(ims,screen,sm, positionS, nl, nc);
+					dessiner(imz,screen,zx, positionZ, nl, nc);
 					break;
 			}
 			
-			//dessiner(im,screen,zx, positionZ, nl, nc);
 			SDL_Flip(screen);
 		}	
 
