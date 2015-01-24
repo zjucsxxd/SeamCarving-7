@@ -6,10 +6,10 @@ void afficheTab(unsigned char **tab,int nl, int nc)
 	int i,j;
 	for (i=0;i<nl;i++)
 	{
-		printf("Ligne n°%d|", i);
+		printf("\t\t");
 		for (j=0;j<nc;j++)
 		{
-			printf("    %d    |",tab[i][j]);
+			printf("    %3.0d    |",tab[i][j]);
 		}
 		printf("\n");
 	}
@@ -24,7 +24,7 @@ void afficheTabInt(unsigned int **tab,int nl, int nc)
 		printf("|");
 		for (j=0;j<nc;j++)
 		{
-			printf("    %d    |",tab[i][j]);
+			printf("    %3.0d    |",tab[i][j]);
 		}
 		printf("\n");
 	}
@@ -37,7 +37,7 @@ void affiche1D(unsigned int* tab, int n)
 	printf("|");
 	for (i=0;i<n;i++)
 	{
-		printf("      %d     |",tab[i]);
+		printf("      %3.0d     |",tab[i]);
 	}
 	printf("\n\n");
 }

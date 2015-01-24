@@ -9,8 +9,10 @@ int main(int argc, char *argv[])
 	unsigned char** im = NULL;
 	unsigned char** ims = NULL;
 	unsigned char** imz = NULL;
-	int test = 0;
-	//test = lire();	
+	int test = 2;
+    printf("Que voulez-vous faire ?\n\t0 - Image avec SDL.\n\t1 - Tableau de test pré-rentré.\n\t2 - Entrée de l'image manuellement.\n\n");
+    printf("Choix : ");
+	test = lire();	
 
 	if (test == 1) //Tableau de test pré-rentré
 	{
@@ -82,32 +84,34 @@ int main(int argc, char *argv[])
 
 	}
 
-	else if (test == 0)
+	else if (test == 0) //Image par SDL
 	{
 		SDL_Init(SDL_INIT_VIDEO);
 		SDL_Surface *screen = NULL;
 		SDL_Surface *sm=NULL;
-		SDL_Surface *zx=NULL;
+		//SDL_Surface *zx=NULL;
 
-		im = lire_image(argv[1], &nl, &nc);
+		im = lire_image("pictures/mongol.bmp", &nl, &nc);
 		int NC = nc;
 
 		SDL_Rect positionS;
 		positionS.x=0;
 		positionS.y=0;
+        /*
 		SDL_Rect positionZ;
 		positionZ.x=0;
 		positionZ.y=nl;
-	
-		screen = SDL_SetVideoMode(nc,2*nl,32,SDL_HWSURFACE | SDL_RESIZABLE);
+        */	
+        
+		screen = SDL_SetVideoMode(nc,nl,32,SDL_HWSURFACE | SDL_RESIZABLE | SDL_DOUBLEBUF);
 		SDL_WM_SetCaption("SeamCarving",NULL); 
 
 		sm = SDL_CreateRGBSurface(SDL_HWSURFACE, nc, nl, 32, 0, 0, 0, 0);
-		zx = SDL_CreateRGBSurface(SDL_HWSURFACE, nc, nl, 32, 0, 0, 0, 0);
+		//zx = SDL_CreateRGBSurface(SDL_HWSURFACE, nc, nl, 32, 0, 0, 0, 0);
 
 
 		dessiner(im,screen,sm, positionS, nl, nc);
-		dessiner(im,screen,zx, positionZ, nl, nc);
+		//dessiner(im,screen,zx, positionZ, nl, nc);
 
 			
 		int continuer =1;
@@ -135,13 +139,10 @@ int main(int argc, char *argv[])
 
 				case SDL_VIDEORESIZE:
 					nc = event.resize.w;
-					//printf("\n\nnc = %d\n", nc);
-					//printf("NC = %d\nNC - nc = %d\n",NC,NC-nc);
 					ims = seam_carving(im,NC-nc,nl,NC);
-					imz = zoomx(im,NC-nc,nl,NC);
-					//afficheTab(ims,nl,nc);
+					//imz = zoomx(im,NC-nc,nl,NC);
 					dessiner(ims,screen,sm, positionS, nl, nc);
-					dessiner(imz,screen,zx, positionZ, nl, nc);
+					//dessiner(imz,screen,zx, positionZ, nl, nc);
 					break;
 			}
 			
@@ -152,13 +153,14 @@ int main(int argc, char *argv[])
 
 		
 		SDL_FreeSurface(sm);
-		SDL_FreeSurface(zx);
+		//SDL_FreeSurface(zx);
 		SDL_Quit();
 
 		libere_image_char(im);
-		//libere_image_char(ims);
+		libere_image_char(ims);
 		//libere_image_char(imz);
 	}
+
 	else  //Entrée manuelle du tableau
 	{
 		printf("\n\n\nEntrez manuellement le tableau représentant l'image de base.\n");
@@ -196,9 +198,6 @@ int main(int argc, char *argv[])
 		libere_image_char(imz);
 
 	}	
-	
-
-		
 	
 	
 	return EXIT_SUCCESS;	
